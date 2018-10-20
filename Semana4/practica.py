@@ -22,3 +22,4 @@ def extraer_numeros_divisibles_por_7_no_por_5(min, max):
 print(extraer_numeros_divisibles_por_7_no_por_5(2000, 3200))
 
 
+
