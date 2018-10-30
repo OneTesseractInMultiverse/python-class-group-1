@@ -6,5 +6,4 @@ while numero_actual <= 100:
     numero_actual = numero_actual + 1
     # En este punto vuelve a evaluar la condición
     # inicial del while
-
 print("La suma total es: {}, y su mitad es: {}".format(suma_total, suma_total/2))

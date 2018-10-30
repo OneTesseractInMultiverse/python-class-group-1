@@ -1,11 +1,11 @@
 
 
 # FUNCTION ELEVAR POTENCIA
-def elevar_potencia(base: float, exponente: float) -> float:
+def elevar_potencia(base, exponente):
     return float(base ** exponente)
 
 # FUNCION CALCULAR RAIZ
-def calcular_raiz(raiz: float, numero: float) -> float:
+def calcular_raiz(raiz, numero):
     resultado = None
     if raiz > 0:
         raiz =  float(1/raiz)
@@ -24,7 +24,7 @@ def negativo(numero) -> float:
     return numero * -1
 
 # CALCULAR INTERSECCIÓN CON EJE
-def calcular_intersecion_con_eje(a, b, raiz_de_discriminante, raiz_disc_negativa: boolean):
+def calcular_intersecion_con_eje(a, b, raiz_de_discriminante, raiz_disc_negativa: bool):
     resultado = None
     b = negativo(float(b))
     a = float(a)
@@ -42,8 +42,6 @@ def calcular_soluciones(a, b, c):
     return {
         "x0": calcular_intersecion_con_eje(a, b, raiz_de_discriminante, True), 
         "x1": calcular_intersecion_con_eje(a, b, raiz_de_discriminante, False)
-    }
-    
-    
+    }    
 
 print(calcular_soluciones(a=1, b=5, c=6))
