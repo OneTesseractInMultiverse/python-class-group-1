@@ -1,7 +1,6 @@
 # CircuitPlaygroundExpress_NeoPixel
 
 import time
-
 import board
 import neopixel
 

@@ -1,24 +1,32 @@
 
 
 # FUNCTION ELEVAR POTENCIA
-def elevar_potencia(base, exponente):
+def eleve_potencia(base, exponente):
     return float(base ** exponente)
+
+def calcule_exponente_radical(denominador):
+    return float(1/denominador)
+
 
 # FUNCION CALCULAR RAIZ
 def calcular_raiz(raiz, numero):
     resultado = None
     if raiz > 0:
-        raiz =  float(1/raiz)
-        resultado = elevar_potencia(numero, raiz)
+        raiz =  calcule_exponente_radical(raiz)
+        resultado = eleve_potencia(numero, raiz)
     return resultado
+
+def calcule_4ac(a, c):
+    return (4*a*c)
 
 # FUNCION CALCULAR DISCRIMINANTE
 def calcular_discriminante(a, b, c):
     """
         El dicriminante se calcular como d = (b^2) - 4(a)(c)
     """
-    disc = float(elevar_potencia(base = b, exponente = 2) - (4*a*c))
-    return disc
+    b_cuadrado = eleve_potencia(base = b, exponente = 2)
+    cuatro_ac = calcule_4ac(a, c)
+    return float(b_cuadrado - cuatro_ac)
 
 def negativo(numero) -> float:
     return numero * -1
