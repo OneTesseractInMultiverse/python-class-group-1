@@ -1,4 +1,7 @@
 
+# ---------------------------------------------------------------------------
+# CLASE ESTUDIO
+# ---------------------------------------------------------------------------
 # Definición básica de una clase
 # Los nombres de las clases son lo único que utiliza CamelCase
 class Estudio(object):
@@ -27,17 +30,91 @@ class Estudio(object):
     def set_as_incomplete(self):
         self.__completed = False
 
-# Estoy creando una instancia de Estudio a partir de la clase Estudio
-estudio_en_harvard = Estudio(
-    institution= "Harvard", 
-    completed=True, 
-    degree="Bachelor Degree in Physics", 
-    year_of_completion=2018
+# ---------------------------------------------------------------------------
+# CLASE JOB
+# ---------------------------------------------------------------------------
+class Job(object):
+
+    def __init__(self,company, position, started, finished, is_actual_job, description):
+        self.__company = company
+        self.__position = position
+        self.__started = started
+        self.__finished = finished
+        self.__is_actual_job = is_actual_job
+        self.__description = description
+
+    def as_dictionary(self):
+        return {
+            "company": self.__company,
+            "position": self.__position,
+            "started": self.__started,
+            "finished": self.__finished,
+            "is_actual_job": self.__is_actual_job,
+            "description": self.__description
+        }
+
+    def __calculate_experience_when_not_actual_job(self):
+        return self.__finished - self.__started
+    
+    def __calculate_experience_when_actual_job(self, actual_year):
+        return actual_year - self.__started
+
+    def get_years_of_experience(self, actual_year):
+        if self.__is_actual_job:
+            return self.__calculate_experience_when_actual_job()
+        else:
+            return self.__calculate_experience_when_not_actual_job()
+
+
+
+class Curriculum(object):
+
+    def __init__(self, name, last_name, age, email):
+        self.__name = name
+        self.__last_name = last_name
+        self.__age = age
+        self.__email = email
+        self.__education = []
+        self.__experience = []
+    
+    def add_education(self, education):
+        if education is not None:
+            self.__education.append(education)
+
+    def add_experience(self, job):
+        if job is not None:
+            self.__experience.append(job)
+
+    def get_total_years_of_experience(self, actual_year):
+        total = 0
+        for job in self.__experience:
+            total += job.get_years_of_experience(actual_year)
+        return total
+
+
+# ---------------------------------------------------------------------------
+# ACA YA ESTAMOS FUERA DE CLASE
+# ---------------------------------------------------------------------------
+
+curriculum = Curriculum(
+    name="John", 
+    last_name="Smith", 
+    age = 37, 
+    email="john.smith@example.com"
 )
 
-print(estudio_en_harvard.as_diccionary())
-estudio_en_harvard.set_as_incomplete()
-print(estudio_en_harvard.as_diccionary())
+curriculum.add_experience(Job(
+    company="Los Patitos S.A", 
+    position="Engineer", 
+    started=1980, 
+    finished=2007, 
+    is_actual_job=False, 
+    description="Bug People"
+))
+
+print(curriculum.get_total_years_of_experience(2018))
+
+
 """
 curriculum = {
     "name": "John", 
