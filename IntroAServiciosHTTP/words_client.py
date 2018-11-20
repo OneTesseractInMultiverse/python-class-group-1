@@ -84,6 +84,15 @@ def extraer_vocabulario_y_frecuencias(texto_sin_puntuacion):
         vocabulario = agregar_palabra_al_vocabulario(vocabulario, palabra)
     return vocabulario
 
+def eliminar_stop_words(vocabulario, lista_stopwords):
+    # se eliminen del vocabulario todos los stopwords que se puedan encontrar
+    # en la lista de stopwords
+    for stopword in lista_stopwords:
+        if stopword in vocabulario:
+            del vocabulario[stopword]
+    return vocabulario
 
 texto_sin_puntuacion = convertir_a_minuscula(eliminar_puntuacion(texto_crudo, [".", ",", ":", ";", "\n"]))
-pprint.pprint(extraer_vocabulario_y_frecuencias(texto_sin_puntuacion))
+vocabularion_con_stopwords = extraer_vocabulario_y_frecuencias(texto_sin_puntuacion)
+vocabulario_sin_stopwords = eliminar_stop_words(vocabularion_con_stopwords, stop_words)
+pprint.pprint(vocabulario_sin_stopwords)
