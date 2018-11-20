@@ -50,3 +50,40 @@ if response.status_code == 200:
 if 400 <= response.status_code < 500:
     print("La petición HTTP no es correcta [{}]".format(response.status_code))
 print(response.status_code) # Leer el código de estado HTTP
+
+def convertir_a_minuscula(texto):
+    return texto.lower()
+
+def eliminar_puntuacion(texto_con_puntuacion, lista_caracteres_por_eliminar):
+    texto_sin_puntuacion = texto_con_puntuacion
+    for caracter in lista_caracteres_por_eliminar:
+        if caracter != "\n":
+            texto_sin_puntuacion = texto_sin_puntuacion.replace(caracter, "")
+        else:
+            texto_sin_puntuacion = texto_sin_puntuacion.replace(caracter, " ")
+    return texto_sin_puntuacion
+
+def agregar_palabra_por_primera_vez(vocabulario, palabra):
+    vocabulario[palabra] = 1
+    return vocabulario
+
+def incrementar_frecuencia_de_palabra(vocabulario, palabra):
+    vocabulario[palabra] = vocabulario[palabra] + 1
+    return vocabulario
+
+def agregar_palabra_al_vocabulario(vocabulario, palabra):
+    if palabra in vocabulario:
+        return incrementar_frecuencia_de_palabra(vocabulario, palabra)
+    else:
+        return agregar_palabra_por_primera_vez(vocabulario, palabra)
+
+def extraer_vocabulario_y_frecuencias(texto_sin_puntuacion):
+    todas_las_palabras_con_repeticiones = texto_sin_puntuacion.split(" ")
+    vocabulario = {}
+    for palabra in todas_las_palabras_con_repeticiones:
+        vocabulario = agregar_palabra_al_vocabulario(vocabulario, palabra)
+    return vocabulario
+
+
+texto_sin_puntuacion = convertir_a_minuscula(eliminar_puntuacion(texto_crudo, [".", ",", ":", ";", "\n"]))
+pprint.pprint(extraer_vocabulario_y_frecuencias(texto_sin_puntuacion))
