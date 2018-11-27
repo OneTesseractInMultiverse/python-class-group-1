@@ -1,0 +1,13 @@
+- Tienen que crear tres funciones en el server que puedan manejar los siguientes requests:
+
+    - PUT /api/v1/message -> toma el mensaje que viene en el request como json y los imprime 
+                             por medio del log de debug.
+
+    - POST /api/v1/message -> toma el mensaje y lo redistribuye a la lista de subscribers y 
+                              envía los requests por medio de PUT
+
+    - POST /api/v1/subscriber -> recibe un json con un único valor que se llama "ip" y lo
+                                 almacena en una lista en memoria de subscribers
+
+
+                                 
