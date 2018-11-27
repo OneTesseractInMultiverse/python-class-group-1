@@ -4,6 +4,7 @@ pip install flask
 """
 import os
 from flask import Flask, jsonify, request
+import requests
 
 
 app = Flask("EvilApi")
@@ -22,6 +23,13 @@ def id_exists(id, persons):
         if person["id"] == id:
             return True
     return False
+
+def broadcast_message(msg, subscribers):
+    for subscriber in subscribers:
+        endpoint = "http://{}:5000/api/v1/message".format(subscriber)
+        response = requests.put(url=endpoint, json={"msg": msg})
+        app.logger.debug(response.status_code)
+
 
 def post_subscriber():
     if not request.is_json:
