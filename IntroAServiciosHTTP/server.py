@@ -10,6 +10,9 @@ app = Flask("EvilApi")
 app.debug = True
 
 persons = []
+subscribers = []
+
+
 
 def id_exists(id, persons):
     app.logger.debug("id_exists was called")
@@ -19,6 +22,22 @@ def id_exists(id, persons):
         if person["id"] == id:
             return True
     return False
+
+def post_subscriber():
+    if not request.is_json:
+        return jsonify({
+            "msg": "Only json is supported in this api"
+        }), 400
+
+    datos = request.get_json()
+
+    if "ip" not in datos:
+        return jsonify({
+            "msg": "An id is required"
+        }), 400
+
+    subscribers.append(datos["ip"])
+    return jsonify({"msg": "todo salio bien"}), 200
 
 @app.route('/')
 def get_root_resource():
