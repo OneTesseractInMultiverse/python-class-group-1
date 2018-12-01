@@ -7,7 +7,7 @@ from flask import Flask, jsonify, request
 import requests
 
 
-app = Flask("EvilApi")
+app = Flask()
 app.debug = True
 
 persons = []
