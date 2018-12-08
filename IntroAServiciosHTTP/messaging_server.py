@@ -19,12 +19,12 @@ def get_message_endpoint_for(ip):
 def send_message_to_subscriber(subscriber_ip, message, app):
     try:
         url = get_message_endpoint_for(subscriber_ip)
-        request.put(url, json={"msg": message})
+        response = requests.put(url, json={"msg": message})
         app.logger.debug(response.status_code)
         return True
     except Exception as e:
         app.logger.error(e)
-        app.logger.error(e.message)
+        #app.logger.error(e.msg)
         return False
 
 def broadcast_message_to_subscribers(subscribers, app, message):
